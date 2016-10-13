@@ -3,11 +3,18 @@ function login(){
 	require_once("connect.php");
 if(isset($_POST["user_id"]) && !empty($_POST["user_pass"]) && isset($_POST["user_id"]) && !empty($_POST["user_pass"]))
 {
-	$query = "SELECT id,user_id,password from register_user where user_id = '".mysql_real_escape_string($_POST["user_id"])."' and password = '".md5(mysql_real_escape_string($_POST['user_pass']))."'";
-	$result = mysql_query($query);
-	if(@mysql_num_rows($result)  > 0)
+	$username = $_POST["user_id"];
+	$password = $_POST["user_pass"];
+	$stmt = $con->prepare("SELECT id,user_id,password FROM register_user where user_id = :username and password = :password ");
+	$stmt->bindParam(":firstname",$username);
+	$stmt->bindParam(":password",$password);
+	$stmt->execute();
+	$result = $stmt->fetchAll();
+	foreach($result as $row)
 	{
-		$id = mysql_result($result,0,'id');
+		$id = $row['id'];
+	}
+	if(!empty($id))
 		$_SESSION['id'] = $id;
 		header("Location: index.php");
 	}
