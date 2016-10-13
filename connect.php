@@ -1,5 +1,5 @@
 <?php
-
+/*
 class Serverexception extends Exception {
 	public function showsverror(){
 		echo "We have a server error";
@@ -38,6 +38,21 @@ catch(Serverexception $ex1)
 catch(Databaseexception $ex2)
 {
 	echo $ex2->showdberror();
+}
+*/
+try
+{
+	$username = "root";
+	$password = "";
+	$host = "localhost";
+	$db_name = "a_database";
+	$con = PDO("mysql:host=$host,dbname=$db_name",$username,$password);
+	$con->setAttribute();
+	
+}
+catch (Exception $ex)
+{
+	echo $ex->getMessage();
 }
 
 ?>
