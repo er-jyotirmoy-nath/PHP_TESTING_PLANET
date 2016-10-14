@@ -4,17 +4,18 @@ function login(){
 if(isset($_POST["user_id"]) && !empty($_POST["user_pass"]) && isset($_POST["user_id"]) && !empty($_POST["user_pass"]))
 {
 	$username = $_POST["user_id"];
-	$password = $_POST["user_pass"];
-	$stmt = $con->prepare("SELECT id,user_id,password FROM register_user where user_id = :username and password = :password ");
-	$stmt->bindParam(":firstname",$username);
-	$stmt->bindParam(":password",$password);
+	$password = MD5($_POST["user_pass"]);
+	$stmt = $con->prepare('SELECT id,user_id,password FROM register_user where user_id = :username and password = :password ');
+
+	$stmt->bindParam(':username',$username,PDO::PARAM_STR,12);
+	$stmt->bindParam(':password',$password,PDO::PARAM_STR,12);
 	$stmt->execute();
 	$result = $stmt->fetchAll();
 	foreach($result as $row)
 	{
 		$id = $row['id'];
 	}
-	if(!empty($id))
+	if(!empty($id)){
 		$_SESSION['id'] = $id;
 		header("Location: index.php");
 	}

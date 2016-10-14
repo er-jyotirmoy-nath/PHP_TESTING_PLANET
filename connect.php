@@ -46,8 +46,8 @@ try
 	$password = "";
 	$host = "localhost";
 	$db_name = "a_database";
-	$con = PDO("mysql:host=$host,dbname=$db_name",$username,$password);
-	$con->setAttribute();
+	$con = new PDO("mysql:host=$host;dbname=$db_name",$username,$password);
+	
 	
 }
 catch (Exception $ex)
