@@ -17,7 +17,7 @@ else
 	<script type="text/javascript">
 		function load2()
 		{
-			document.getElementById('result1').innerHTML = '<b><i>Working...</i></b>';
+			
 			var user_id = document.forms["register"]["user_id"].value;
 			var user_pass = document.forms["register"]["user_pass"].value;
 			var user_fname = document.forms["register"]["user_fname"].value;
@@ -56,6 +56,7 @@ else
 
 
 <h2>Please register yourself !!</h2><br>
+<div id="result1">
 <form name="register" >
 		Enter your Userid:<br>
 		<input type="text" name="user_id" value="" autocomplete="off"/><br><br>
@@ -68,11 +69,11 @@ else
 		Enter Last Name:<br>
 		<input type="text" name="user_lname" value="" autocomplete="off"/><br><br>
 		<input type="button" value="Submit" onclick="load2();" />
-		</form>
+		</form></div>
 		<?php
 }
 	
 ?>
-<div id="result1"></div>
+
 	</body>
 	</html>

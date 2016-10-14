@@ -8,7 +8,7 @@
 <script>
     $(document).ready(function(){
         setInterval(function() {
-            $("#latestData").load("getLatestData.php");
+            $("#latestData").load("random.php");
         }, 10000);
     });
 

@@ -20,8 +20,9 @@ function getuserdata($field,$id){
 	
 
 	$con = new PDO("mysql:host=localhost;dbname=a_database","root","");
-	$stmt = $con->prepare("SELECT :field from register_user where id = :id");
-	$stmt->bindParam(':field',$field);
+	$field = str_ireplace("'", "",$field);
+	$stmt = $con->prepare("SELECT ".$field." from register_user where id = :id");
+	
 	$stmt->bindParam(':id',$id,PDO::PARAM_STR,12);
 	$stmt->execute();
 	$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -31,6 +32,7 @@ function getuserdata($field,$id){
 		
 	}
 	return $myfield;
+	$con = null;
 }
 catch(Exception $ex){
 	echo $ex->getMessage();
