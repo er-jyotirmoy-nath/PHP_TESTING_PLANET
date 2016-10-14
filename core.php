@@ -6,7 +6,7 @@ ini_set("magic_quotes_gpc", "On");
 @$http_refer = $_REQUEST['HTTP_REFERER'];
 function loggedin(){
 
-if(isset($_SESSION["id"])&& !empty($_SESSION["id"])){
+if((isset($_SESSION["id"])&& !empty($_SESSION["id"])) || (isset($_COOKIE["id"])&& !empty($_COOKIE["id"]))){
 	return true;
 }
 else
