@@ -33,7 +33,7 @@ else
 	
 	?>
 Are you already Registered?<br><form name="login_user" action=<?php echo $_SERVER["PHP_SELF"]; ?> method="POST">
-	User Name: <input type="text" name="user_id" value="" /> Password: <input type="password" name="user_pass" value=""/><input type="submit" value="Submit" name="user_submit">
+	User Name: <input type="text" name="user_id" value="" /> Password: <input type="password" name="user_pass" value=""/><input type="checkbox" name = "Stay" />Stay logged in<input type="submit" value="Submit" name="user_submit">
 </form>
 <br>Not Registered Yet?&nbsp<a href="register_ajax.php" >Register Now!!</a>
 	<?php
