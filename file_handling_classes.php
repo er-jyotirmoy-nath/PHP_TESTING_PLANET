@@ -13,17 +13,25 @@ function public __construct($dirname){
     }
   }
 }
-  function public writetofile($filename)
+  function public writetofile($filename,$text)
   {
+   
+     $handle = fopen($filename,"a");
+     fwrite($handle,$text);
+      fclose($handle);
     
+  
   }
   function public deletefile($filename)
   {
-    
+    unlink($filename);
   }
   function public readafile($filename)
   {
-    
+    $handle = fopen($filename,"r);
+     $string = fread($handle,filesize($filename));
+      fclose($handle);
+      return $string;
   }
 }
 
