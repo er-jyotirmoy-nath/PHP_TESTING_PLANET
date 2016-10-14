@@ -15,9 +15,13 @@ if(isset($_POST["user_id"]) && !empty($_POST["user_pass"]) && isset($_POST["user
 	{
 		$id = $row['id'];
 	}
-	if(!empty($id)){
+	if(!empty($id) && !isset($_POST['stay'])){
 		$_SESSION['id'] = $id;
 		header("Location: index.php");
+	}
+	else if(!empty($id) && isset($_POST['stay']))
+	{
+		setcookie("id",$id,time()+3600);
 	}
 	else
 	{
