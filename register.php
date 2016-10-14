@@ -15,16 +15,19 @@ if(isset($_POST["user_id"]) && !empty($_POST["user_id"]) && isset($_POST["user_p
 		$usert = date("d M Y H:m:s",time());
 		//if(!check_user_reg())
 		//{
-
+			try{
 			$query = "insert into register_user values ('NULL','$user_id','$password','$fname','$lname','$usert')";
-			if(mysql_query($query))
-			{
-				echo 'Registeration Successfull..<a href="index.php">Login</a>';
+			$con = new PDO("mysql:host=localhost;dbname=a_database","localhost","");
+			$stmt = $con->prepare("insert into(user_id,password,first_name,last_name,time) register_user values(:user_id,:password,:fname,:lname,:utime)");
+			$stmt->bindParam(":user_id",$user_id);
+			$stmt->bindParam(":password",$password);
+			$stmt->bindParam(":fname",$fname);
+			$stmt->bindParam(":lname",$lname);
+			$stmt->bindParam(":utime",$usert);
+			$stmt->exectue();
 			}
-			else
-			{
-				echo "The error is: ".mysql_error();
-				
+			catch (Exception $ex){
+				echo $ex->getMessage();
 			}
 	//	}
 	//	else
