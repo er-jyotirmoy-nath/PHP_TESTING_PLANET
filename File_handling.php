@@ -9,7 +9,7 @@ if(isset($_POST['edit']))
 if(isset($_POST['delete']))
 {
   $filename = base64_decode($_GET['id']);
- unline($filename);
+ unlink($filename);
   echo "file deleted";
 }
 $directory = $_POST['Directory'];
