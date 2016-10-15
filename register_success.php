@@ -1,1 +1,0 @@
-You have been registered successfully. You may login...<a href="index.php">Go</a>
