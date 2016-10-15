@@ -2,31 +2,36 @@
 		
 class registeruser
 {
-	public $user_id;
+	public $userid;
 	public $password;
 	public $fname;
 	public $lname;
 	public $usert;
 	
-	function public __construct($a,$b,$c,$d,$e)
+	function  __construct()
 	{
-		$this->$user_id = $a;
+		/*$this->$user_id = $a;
 		$this->$password = $b;
 		$this->$fname = $c;
 		$this->$lname = $d;
-		$this->$usert = $e;
+		$this->$usert = $e;*/
 		
 	}
-	public function checkuser($id)
+	private function checkuser($id)
 	{
-		$con = new PDO("mysql:host=localhost;dbname=a_database","localhost","");
-		$con->setAttribute(PDO::ATTR_ERRORMODE,PDO::ERRMODE_EXCEPTION);
-		$stmt_select = prepare("select count(id) from register_user where user_id = :user_id");
+		$con = new PDO("mysql:host=localhost;dbname=a_database","root","");
+		$con->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+		$stmt_select = $con->prepare("select count(id) as count_id from register_user where user_id = :user_id");
 		$stmt_select->bindParam(":user_id",$id);
 		$stmt_select->execute();
-		$result = $stmt_select->fetchAll();
-		$row = $result[0];
-		if($row >= 1)
+		$result = $stmt_select->fetchAll(PDO::FETCH_ASSOC);
+		foreach ($result as $row) {
+		$count = $row["count_id"];
+
+			# code...
+		}
+		
+		if($count >= 1)
 		{
 			return true;
 		}
@@ -36,19 +41,27 @@ class registeruser
 		}
 		
 	}
-	public function insert()
+	public function insert($uid,$upass,$ufn,$uln,$urt)
 	{
-		if($this->checkuser($user_id))
+		$this->userid = $uid;
+		$this->password = $upass;
+		$this->fname = $ufn;
+		$this->lname = $uln;
+		$this->usert = $urt;
+		if(!$this->checkuser($uid))
 		{
 		try
 		{
-			$stmt = $con->prepare("insert into(user_id,password,first_name,last_name,time) register_user values(:user_id,:password,:fname,:lname,:utime)");
-			$stmt->bindParam(":user_id",$this->$user_id);
-			$stmt->bindParam(":password",$this->$password);
-			$stmt->bindParam(":fname",$this->$fname);
-			$stmt->bindParam(":lname",$this->$lname);
-			$stmt->bindParam(":utime",$this->$usert);
-			$stmt->exectue();
+		
+		$con = new PDO("mysql:host=localhost;dbname=a_database","root","");
+			$stmt = $con->prepare("insert into register_user(user_id,password,first_name,last_name,reg_time) values(:user_id,:password,:fname,:lname,:utime)");
+			$stmt->bindParam(":user_id",$this->userid);
+			$stmt->bindParam(":password",$this->password);
+			$stmt->bindParam(":fname",$this->fname);
+			$stmt->bindParam(":lname",$this->lname);
+			$stmt->bindParam(":utime",$this->usert);
+			$stmt->execute();
+			$con=null;
 			return true;
 		}
 		catch (Exception $ex)
@@ -68,13 +81,13 @@ if(isset($_POST["user_id"]) && !empty($_POST["user_id"]) && isset($_POST["user_p
 {
 	
 
-		$user_id = mysql_real_escape_string($_POST["user_id"]);
-		$password = md5(mysql_real_escape_string($_POST["user_pass"]));
-		$fname = mysql_real_escape_string($_POST["user_fname"]);
-		$lname = mysql_real_escape_string($_POST["user_lname"]);
-		$usert = date("d M Y H:m:s",time());
-		$reg1 = new registeruser($user_id,$password,$fname,$lname,$usert);
-		if($reg1->insert())
+		$uid = mysql_real_escape_string($_POST["user_id"]);
+		$upass = md5(mysql_real_escape_string($_POST["user_pass"]));
+		$ufn = mysql_real_escape_string($_POST["user_fname"]);
+		$uln = mysql_real_escape_string($_POST["user_lname"]);
+		$urt = date("d M Y H:m:s",time());
+		$reg1 = new registeruser();
+		if($reg1->insert($uid,$upass,$ufn,$uln,$urt))
 		{
 			echo 'You have been registered...<a  href="index.php">Login</a>';
 			
