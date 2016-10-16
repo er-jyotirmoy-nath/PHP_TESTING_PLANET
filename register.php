@@ -54,7 +54,7 @@ class registeruser
 		{
 		
 		$con = new PDO("mysql:host=localhost;dbname=a_database","root","");
-			$stmt = $con->prepare("insert into register_user(user_id,password,first_name,last_name,reg_time) values(:user_id,:password,:fname,:lname,:utime)");
+			$stmt = $con->prepare("insert into register_user(user_id,password,first_name,last_name,photo_count,reg_time) values(:user_id,:password,:fname,:lname,0,:utime)");
 			$stmt->bindParam(":user_id",$this->userid);
 			$stmt->bindParam(":password",$this->password);
 			$stmt->bindParam(":fname",$this->fname);
