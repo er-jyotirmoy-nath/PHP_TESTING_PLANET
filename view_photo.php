@@ -16,7 +16,7 @@ class viewphotos
 		$list = '';
 		foreach ($result as $value) {
 			# code...
-			$list .= $value['ID'].' '.getuserdata('first_name',$value['USER_ID']).' '.getuserdata('last_name',$value['USER_ID']).' <img src="uploads/'.$value['PHOTO_FILE'].'" height="150" width="300"> '.$value['USER_COMM'].' '.$value['CATEGORY_ID'].'<br>';
+			$list .= $value['ID'].' '.getuserdata('first_name',$value['USER_ID']).' '.getuserdata('last_name',$value['USER_ID']).' <img src="uploads/'.$value['PHOTO_FILE'].'" height="150" width="300"> '.$value['USER_COMM'].' '.uphotoupload::getcatdata('CATEGORY',$value['CATEGORY_ID']).'<br>';
 
 		}
 		echo $list;

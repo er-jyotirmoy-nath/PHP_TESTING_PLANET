@@ -39,6 +39,31 @@ class uphotoupload extends file_handling
 		}
 	}
 
+	function getcatdata($field,$id){
+		try{
+
+		
+
+		$con = new PDO("mysql:host=localhost;dbname=a_database","root","");
+		$field = str_ireplace("'", "",$field);
+		$stmt = $con->prepare("SELECT ".$field." from CATEGORY where CATEGORY_ID = :id");
+		
+		$stmt->bindParam(':id',$id,PDO::PARAM_STR,12);
+		$stmt->execute();
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		foreach($result as $row)
+		{
+			$myfield = $row[$field];
+			
+		}
+		return $myfield;
+		$con = null;
+		}
+		catch(Exception $ex){
+			echo $ex->getMessage();
+		}
+	}
+	
 	public function photosave($fnm,$ftmp,$ftyp,$fs,$cid,$text)
 	{
 		
@@ -132,4 +157,5 @@ catch(Exception $ex){
 	echo $ex->getMessage();
 }
 }
+
 ?>
