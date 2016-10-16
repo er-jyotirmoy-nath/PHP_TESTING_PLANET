@@ -1,5 +1,6 @@
 <?php 
 require_once("core.php");
+
 ?>
 <?php
 
@@ -14,8 +15,17 @@ if(isset($_POST["submit"]) && !empty($_POST["submit"]))
 		$tp = $_FILES['file']['type'];
 		$s= $_FILES['file']['size'];
 		$cid = $_POST["category_get"];
+		$txt = $_POST["smile_say"];
 		$user1 = new uphotoupload();
-		$user1->photosave($n,$t,$tp,$s,$cid);
+		if($user1->photosave($n,$t,$tp,$s,$cid,$txt))
+		{
+			$status = base64_encode("uploadsuccess");
+			header("Location: register_success.php?status=$status");
+		}
+		else
+		{
+			echo "Something is wrong";
+		}
 		
 
 }

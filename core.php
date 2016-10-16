@@ -4,22 +4,21 @@ session_start();
 ini_set("magic_quotes_gpc", "On");
 @$script_name = $_SERVER['script_name'];
 @$http_refer = $_REQUEST['HTTP_REFERER'];
-
-class uphotoupload
+require_once("file_handling_classes.php");
+class uphotoupload extends file_handling
 {
 	private $name ;
 	private $tmp_name ;
 	private $type ;
 	private $size ;
 	function __construct(){}
-	public function updateuserupload($id_ph,$photo_nm,$cid)
+	public function updateuserupload($id_ph,$photo_nm,$cid,$fnm)
 	{
 		try
 		{
-			echo $id_ph.''.$photo_nm;
 			$con=null;
 			$con = new PDO("mysql:host=localhost;dbname=a_database","root","");
-			$stmt_photo = $con->prepare("insert into panorama(user_id,photo_file,category_id) values (:userid,:photo,:category_id);");
+			$stmt_photo = $con->prepare("insert into panorama(user_id,photo_file,category_id,user_comm) values (:userid,:photo,:category_id,:userfn);");
 			/*if(!$stmt_photo)
 			{
 				print_r($con->errorInfo());
@@ -29,6 +28,7 @@ class uphotoupload
 				$stmt_photo->bindParam(":userid",$id_ph);
 				$stmt_photo->bindParam(":photo",$photo_nm);
 				$stmt_photo->bindParam(":category_id",$cid);
+				$stmt_photo->bindParam(":userfn",$fnm);
 				$stmt_photo->execute();
 				$con = null;
 			//}
@@ -39,7 +39,7 @@ class uphotoupload
 		}
 	}
 
-	public function photosave($fnm,$ftmp,$ftyp,$fs,$cid)
+	public function photosave($fnm,$ftmp,$ftyp,$fs,$cid,$text)
 	{
 		
 		$this->name = $fnm;
@@ -69,7 +69,10 @@ class uphotoupload
 						$stmt_upload->execute();
 						$idph = $_SESSION['id'];
 						$pnm = md5($first_name).'.'.$extention;
-						$this->updateuserupload($idph,$pnm,$cid);
+						
+						$fnm = md5($first_name).'.txt';
+						file_handling::writetofile($fnm,$text);
+						$this->updateuserupload($idph,$pnm,$cid,$fnm);
 						$con = null;
 						return true;
 					}

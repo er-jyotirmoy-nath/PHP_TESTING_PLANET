@@ -1,10 +1,12 @@
 
 <?php
 
-  class file_handling{
-
-  function public __construct($dirname)
+  class file_handling
   {
+
+ /* function  __construct()
+  {
+
     if($handledir = opendir($dirname))
     {
       echo 'Reading the Directory \ '.$dirname;
@@ -13,8 +15,8 @@
        echo "Files here are".$file."<br>"; 
       }
     }
-  }
-    function public writetofile($filename,$text)
+  }*/
+    public function  writetofile($filename,$text)
     {
      
        $handle = fopen($filename,"a");
@@ -24,12 +26,12 @@
     
     }
     
-    function public deletefile($filename)
+    public function  deletefile($filename)
     {
       unlink($filename);
     }
 
-    function public readafile($filename)
+    public function  readafile($filename)
     {
       $handle = fopen($filename,"r");
        $string = fread($handle,filesize($filename));
