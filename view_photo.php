@@ -21,11 +21,12 @@ class viewphotos
 		}
 		echo $list;
 		}
-		}
+		
 		else
 		{
-			echo '<h5>Nothing to display</h5>';
+			echo '<h3>Nothing to display</h3>';
 		}
+	}
 		catch(Exception $ex){
 			echo $ex->getMessage();
 		}

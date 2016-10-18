@@ -19,12 +19,12 @@ class uphotoupload extends file_handling
 			$con=null;
 			$con = new PDO("mysql:host=localhost;dbname=a_database","root","");
 			$stmt_photo = $con->prepare("insert into panorama(title_photo,user_id,photo_file,category_id,user_comm) values (:tphoto,:userid,:photo,:category_id,:userfn);");
-			if(!$stmt_photo)
-			{
-				print_r($con->errorInfo());
-			}
-			else
-			{
+			// if(!$stmt_photo)
+			// {
+			// 	print_r($con->errorInfo());
+			// }
+			// else
+			// {
 				$stmt_photo->bindParam(":tphoto",$title_photo);
 				$stmt_photo->bindParam(":userid",$id_ph);
 				$stmt_photo->bindParam(":photo",$photo_nm);
@@ -32,7 +32,7 @@ class uphotoupload extends file_handling
 				$stmt_photo->bindParam(":userfn",$fnm);
 				$stmt_photo->execute();
 				$con = null;
-			}
+			// }
 		}
 		catch(Exception $ex)
 		{
