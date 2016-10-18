@@ -1,1 +1,5 @@
 
+# Creating a custom error or 404 not found file
+ErrorDocument 404 /filenotfound.php
+# Limiting access to directory listing
+IndexIgnore *
