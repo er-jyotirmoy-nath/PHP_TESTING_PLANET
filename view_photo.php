@@ -12,7 +12,7 @@ class viewphotos
 		$con->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 		$stmt_getph = $con->prepare("select * from panorama");
 		$stmt_getph->execute();
-		$result = $stmt_getph->fetchAll();
+		if($result = $stmt_getph->fetchAll()){
 		$list = '';
 		foreach ($result as $value) {
 			# code...
@@ -20,6 +20,11 @@ class viewphotos
 
 		}
 		echo $list;
+		}
+		}
+		else
+		{
+			echo '<h5>Nothing to display</h5>';
 		}
 		catch(Exception $ex){
 			echo $ex->getMessage();
