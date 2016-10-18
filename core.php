@@ -65,6 +65,23 @@ class uphotoupload extends file_handling
 		}
 	}
 	
+	public function photodelete($ph_id,$u_id)
+	{
+		$con = new PDO("mysql:host=localhost;dbname=a_database","root","");
+		$con->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+		$stmt_del = $con->prepare("Delete from panorama where id = :id_ph");
+		$stmt_del->bindParam(":id_ph",$id_ph);
+		if(!$stmt_del)
+		{
+			echo $con->errorInfo();
+			die();
+		}
+		else
+		{
+			$stmt_del->execute();
+			$con=null;
+		}
+	}
 	public function photosave($title_photo,$fnm,$ftmp,$ftyp,$fs,$cid)
 	{
 		
