@@ -12,19 +12,20 @@ class uphotoupload extends file_handling
 	private $type ;
 	private $size ;
 	function __construct(){}
-	public function updateuserupload($id_ph,$photo_nm,$cid,$fnm)
+	public function updateuserupload($title_photo,$id_ph,$photo_nm,$cid,$fnm)
 	{
 		try
 		{
 			$con=null;
 			$con = new PDO("mysql:host=localhost;dbname=a_database","root","");
-			$stmt_photo = $con->prepare("insert into panorama(user_id,photo_file,category_id,user_comm) values (:userid,:photo,:category_id,:userfn);");
+			$stmt_photo = $con->prepare("insert into panorama(title_photo,user_id,photo_file,category_id,user_comm) values (:tphoto,:userid,:photo,:category_id,:userfn);");
 			/*if(!$stmt_photo)
 			{
 				print_r($con->errorInfo());
 			}
 			else
 			{*/
+				$stmt_photo->bindParam(":tphoto",$title_photo);
 				$stmt_photo->bindParam(":userid",$id_ph);
 				$stmt_photo->bindParam(":photo",$photo_nm);
 				$stmt_photo->bindParam(":category_id",$cid);
@@ -64,7 +65,7 @@ class uphotoupload extends file_handling
 		}
 	}
 	
-	public function photosave($fnm,$ftmp,$ftyp,$fs,$cid,$text)
+	public function photosave($title_photo,$fnm,$ftmp,$ftyp,$fs,$cid)
 	{
 		
 		$this->name = $fnm;
@@ -97,7 +98,7 @@ class uphotoupload extends file_handling
 						
 						$fnm = md5($first_name).'.txt';
 						file_handling::writetofile($fnm,$text);
-						$this->updateuserupload($idph,$pnm,$cid,$fnm);
+						$this->updateuserupload($title_photo,$idph,$pnm,$cid,$fnm);
 						$con = null;
 						return true;
 					}

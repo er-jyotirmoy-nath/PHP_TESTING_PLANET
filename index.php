@@ -16,8 +16,9 @@ if(isset($_POST["submit"]) && !empty($_POST["submit"]))
 		$s= $_FILES['file']['size'];
 		$cid = $_POST["category_get"];
 		$txt = $_POST["smile_say"];
+		$title = $_POST["title_photo"];
 		$user1 = new uphotoupload();
-		if($user1->photosave($n,$t,$tp,$s,$cid,$txt))
+		if($user1->photosave($title,$n,$t,$tp,$s,$cid,$txt))
 		{
 			$status = base64_encode("uploadsuccess");
 			header("Location: register_success.php?status=$status");
@@ -80,12 +81,14 @@ if(!loggedin())
 		<br>
 		<a href="#">Upload your photo</a> | <a href="#">View your photos</a>(<?php echo getuserdata('p_uploaded',$_SESSION['id']); ?>)
 		<form action=<?php echo $_SERVER['PHP_SELF']; ?> method="POST" enctype="multipart/form-data">
-		<h3>Step 1: Select a photograph that makes you smile.</h3><br>
+		<h3>Step 1: Let's give it a title.</h3><br>
+		<input type="text" name="title_photo"><br>
+		<h3>Step 2: Select a photograph that makes you smile.</h3><br>
         <input type="file" name="file" >
 		<br><br>
-		<h3>Step 2: Enter a paragraph saying why it makes you smile.</h3><br>
+		<h3>Step 3: Enter a paragraph saying why it makes you smile.</h3><br>
 		<textarea name="smile_say" cols="55" rows="10"></textarea><br><br>
-		<h3>Step 3: Select a category.</h3><br>
+		<h3>Step 4: Select a category.</h3><br>
 		
 		<?php
 	

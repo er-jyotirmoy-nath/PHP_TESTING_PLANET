@@ -16,7 +16,7 @@ class viewphotos
 		$list = '';
 		foreach ($result as $value) {
 			# code...
-			$list .= $value['ID'].' '.getuserdata('first_name',$value['USER_ID']).' '.getuserdata('last_name',$value['USER_ID']).' <img src="uploads/'.$value['PHOTO_FILE'].'" height="150" width="300"> '.$value['USER_COMM'].' '.uphotoupload::getcatdata('CATEGORY',$value['CATEGORY_ID']).'<br>';
+			$list .= ' <br><br><h2>'.$value['title_photo'].'</h2> <img src="uploads/'.$value['PHOTO_FILE'].'" height="250" width="400"> <br><p>'.substr(file_handling::readafile($value['USER_COMM']),0,200).'...<a href="">Read More.</a></p><br>Category:-'.ucfirst(strtolower(uphotoupload::getcatdata('CATEGORY',$value['CATEGORY_ID']))).'<br> By:- <a href="?id='.$value['ID'].'">'.ucfirst(strtolower(getuserdata('first_name',$value['USER_ID']))).' '.ucfirst(strtolower(getuserdata('last_name',$value['USER_ID']))).'</a> ';
 
 		}
 		echo $list;
@@ -58,6 +58,7 @@ class viewphotos
 </head>
 <body>
 <h2>Welcome to share-o-smile webpage.</h2>
+<a href="index.php">Upload your photo</a> | <a href="view_photo.php">View your photos</a>(<?php echo getuserdata('p_uploaded',$_SESSION['id']); ?>)
 <?php
 $user1 = new viewphotos();
 $user1->viewurphoto();
