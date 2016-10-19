@@ -61,6 +61,17 @@ class registeruser
 			$stmt->bindParam(":lname",$this->lname);
 			$stmt->bindParam(":utime",$this->usert);
 			$stmt->execute();
+			/*
+			$to = jyotirmoy85@gmail.com;
+			$subject = "A user has been registered";
+			$body= "A new user has been registered";
+			$header = "From: Website Admin <jyotirmoy85@gmail.com>";
+			if(mail($to,$subject,$body,$header))
+			{]
+			else{
+			}
+			
+			*/
 			$con=null;
 			return true;
 		}
