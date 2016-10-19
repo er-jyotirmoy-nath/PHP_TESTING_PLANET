@@ -113,7 +113,7 @@ class uphotoupload extends file_handling
 						$idph = $_SESSION['id'];
 						$pnm = md5($first_name).'.'.$extention;
 						
-						$fnm = md5($first_name).'.txt';
+						$fnm = md5($first_name)."/".md5($first_name).".txt";
 						file_handling::writetofile($fnm,$text);
 						$this->updateuserupload($title_photo,$idph,$pnm,$cid,$fnm);
 						$con = null;
