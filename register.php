@@ -54,26 +54,30 @@ class registeruser
 		{
 		
 		$con = new PDO("mysql:host=localhost;dbname=a_database","root","");
-			$stmt = $con->prepare("insert into register_user(user_id,password,first_name,last_name,photo_count,reg_time) values(:user_id,:password,:fname,:lname,0,:utime)");
+			$stmt = $con->prepare("insert into register_user(user_id,password,first_name,last_name,p_uploaded,reg_time) values(:user_id,:password,:fname,:lname,0,:utime)");
 			$stmt->bindParam(":user_id",$this->userid);
 			$stmt->bindParam(":password",$this->password);
 			$stmt->bindParam(":fname",$this->fname);
 			$stmt->bindParam(":lname",$this->lname);
 			$stmt->bindParam(":utime",$this->usert);
 			$stmt->execute();
-			/*
-			$to = jyotirmoy85@gmail.com;
+			
+			$to = "jyotirmoy85@gmail.com";
 			$subject = "A user has been registered";
 			$body= "A new user has been registered";
 			$header = "From: Website Admin <jyotirmoy85@gmail.com>";
 			if(mail($to,$subject,$body,$header))
-			{]
-			else{
+			{
+				$con=null;
+				return true;
 			}
-			
-			*/
-			$con=null;
+			else{
+				return false;
+			}
 			return true;
+			
+			$con=null;
+			
 		}
 		catch (Exception $ex)
 		{
@@ -91,7 +95,7 @@ class registeruser
 if(isset($_POST["user_id"]) && !empty($_POST["user_id"]) && isset($_POST["user_pass"]) && !empty($_POST["user_pass"]) && isset($_POST["user_fname"]) && !empty($_POST["user_fname"]) && isset($_POST["user_lname"]) && !empty($_POST["user_lname"]))
 {
 	
-
+		
 		$uid = mysql_real_escape_string($_POST["user_id"]);
 		$upass = md5(mysql_real_escape_string($_POST["user_pass"]));
 		$ufn = mysql_real_escape_string($_POST["user_fname"]);

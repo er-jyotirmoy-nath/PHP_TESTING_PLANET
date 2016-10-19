@@ -13,10 +13,12 @@ else
 <!DOCTYPE html>
 <html>
 	<head>
+	<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 		<title>Registration Page</title>
 	<script type="text/javascript">
 		function load2()
 		{
+			
 			
 			var user_id = document.forms["register"]["user_id"].value;
 			var user_pass = document.forms["register"]["user_pass"].value;
@@ -30,7 +32,7 @@ else
 			else
 			{
 				var url = 'user_id='+user_id+'&user_pass='+user_pass+'&user_fname='+user_fname+'&user_lname='+user_lname;
-				
+				document.getElementById('result1').innerHTML = "<i class=\"fa fa-circle-o-notch fa-spin fa-3x fa-fw\"></i><span class=\"sr-only\">Loading...</span>";
 					if(window.XMLHttpRequest){
 					xmlhttp = new XMLHttpRequest();
 				}
