@@ -72,7 +72,7 @@ else
 		<input type="text" name="user_fname" value="" autocomplete="off"/><br><br>
 		Enter Last Name:<br>
 		<input type="text" name="user_lname" value="" autocomplete="off"/><br><br>
-		<input type="button" value="Submit" onclick="load2();" />
+		<input type="button" class="buttons" value="Submit" onclick="load2();" />
 		</form></div>
 		<?php
 }
