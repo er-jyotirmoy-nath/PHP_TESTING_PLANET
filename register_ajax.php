@@ -14,6 +14,8 @@ else
 <html>
 	<head>
 	<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+		<link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
 		<title>Registration Page</title>
 	<script type="text/javascript">
 		function load2()
