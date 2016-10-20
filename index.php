@@ -40,6 +40,8 @@ else
 <html>
 <head>
 	<title>Share-O-Smile</title>
+	<link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
 	<script type="text/javascript">
 		function load(abc){
 			document.getElementById(abc).innerHTML = '<b><i>Working...</i></b>';
