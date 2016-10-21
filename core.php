@@ -82,7 +82,7 @@ class uphotoupload extends file_handling
 			$con=null;
 		}
 	}
-	public function photosave($title_photo,$fnm,$ftmp,$ftyp,$fs,$cid)
+	public function photosave($title_photo,$fnm,$ftmp,$ftyp,$fs,$cid,$text)
 	{
 		
 		$this->name = $fnm;
@@ -90,7 +90,8 @@ class uphotoupload extends file_handling
 		$this->type = $ftyp;
 		$this->size = $fs;
 		//opendir("uploads");
-		$location = md5($first_name)."/";
+		$first_name= getuserdata('first_name',$_SESSION['id']);
+		$location = "uploads /";
 		$extention = strtolower(substr($this->name, strrpos($this->name, '.')+1));
 		$first_name = substr($this->name,0,strrpos($this->name, '.'));
 		if(isset($this->name) && !empty($this->name))
@@ -113,7 +114,7 @@ class uphotoupload extends file_handling
 						$idph = $_SESSION['id'];
 						$pnm = md5($first_name).'.'.$extention;
 						
-						$fnm = md5($first_name)."/".md5($first_name).".txt";
+						$fnm = md5($first_name).".txt";
 						file_handling::writetofile($fnm,$text);
 						$this->updateuserupload($title_photo,$idph,$pnm,$cid,$fnm);
 						$con = null;

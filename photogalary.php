@@ -1,4 +1,39 @@
+<?php
+require_once("file_handling_classes.php");
+class viewphoto extends file_handling
+{
 
+  public function viewphotos($l1,$l2)
+  {
+    try
+    {
+    $con = new PDO("mysql:host=localhost;dbname=a_database","root","");
+    $con->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+    $stmt_getph = $con->prepare("select * from panorama limit ".$l1.",".$l2."");
+    $stmt_getph->execute();
+    if($result = $stmt_getph->fetchAll()){
+    $list = '';
+    foreach ($result as $value) {
+      # code...
+       $list .= '<div class="w3-quarter"><img src="uploads/'.$value['PHOTO_FILE'].'" alt="Sandwich" style="width:100%"><h3>'.$value['title_photo'].'</h3><p>'.substr(file_handling::readafile($value['USER_COMM']),0,200).'</p></div>';
+      
+
+    }
+    echo $list;
+    }
+    
+    else
+    {
+      echo '<h3>Nothing to display</h3>';
+    }
+  }
+    catch(Exception $ex){
+      echo $ex->getMessage();
+    }
+  }
+}
+
+?>
 <!DOCTYPE html>
 <html>
 <title>W3.CSS Template</title>
@@ -10,7 +45,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}
 .w3-sidenav a {padding:20px}
 </style>
 <body>
-
+<?php
+$photo1 = new viewphoto();
+?>
 <!-- Sidenav (hidden by default) -->
 <nav class="w3-sidenav w3-card-2 w3-top w3-xlarge w3-animate-left" style="display:none;z-index:2;width:40%;min-width:300px" id="mySidenav">
   <a href="javascript:void(0)" onclick="w3_close()"
@@ -30,57 +67,29 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}
   
 <!-- !PAGE CONTENT! -->
 <div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px">
+<?php
 
+?>
   <!-- First Photo Grid-->
   <div class="w3-row-padding w3-padding-16 w3-center" id="food">
+<?php
 
-    <div class="w3-quarter">
-      <img src="/w3images/sandwich.jpg" alt="Sandwich" style="width:100%">
-        <h3>The Perfect Sandwich, A Real NYC Classic</h3>
-        <p>Just some random text, lorem ipsum text praesent tincidunt ipsum lipsum.</p>
-    </div>
-    <div class="w3-quarter">
-      <img src="/w3images/steak.jpg" alt="Steak" style="width:100%">
-        <h3>Let Me Tell You About This Steak</h3>
-        <p>Once again, some random text to lorem lorem lorem lorem ipsum text praesent tincidunt ipsum lipsum.</p>
-    </div>
-    <div class="w3-quarter">
-      <img src="/w3images/cherries.jpg" alt="Cherries" style="width:100%">
-        <h3>Cherries, interrupted</h3>
-        <p>Lorem ipsum text praesent tincidunt ipsum lipsum.</p>
-        <p>What else?</p>
-    </div>
-    <div class="w3-quarter">
-      <img src="/w3images/wine.jpg" alt="Pasta and Wine" style="width:100%">
-        <h3>Once Again, Robust Wine and Vegetable Pasta</h3>
-        <p>Lorem ipsum text praesent tincidunt ipsum lipsum.</p>
-    </div>
+$photo1->viewphotos(0,4);   
+
+    
+?>
+   
 
   </div>
   
   <!-- Second Photo Grid-->
   <div class="w3-row-padding w3-padding-16 w3-center">
 
-    <div class="w3-quarter">
-      <img src="/w3images/popsicle.jpg" alt="Popsicle" style="width:100%">
-        <h3>All I Need Is a Popsicle</h3>
-        <p>Lorem ipsum text praesent tincidunt ipsum lipsum.</p>
-    </div>
-    <div class="w3-quarter">
-      <img src="/w3images/salmon.jpg" alt="Salmon" style="width:100%">
-        <h3>Salmon For Your Skin</h3>
-        <p>Once again, some random text to lorem lorem lorem lorem ipsum text praesent tincidunt ipsum lipsum.</p>
-    </div>
-    <div class="w3-quarter">
-      <img src="/w3images/sandwich.jpg" alt="Sandwich" style="width:100%">
-        <h3>The Perfect Sandwich, A Real Classic</h3>
-        <p>Just some random text, lorem ipsum text praesent tincidunt ipsum lipsum.</p>
-    </div>
-    <div class="w3-quarter">
-      <img src="/w3images/croissant.jpg" alt="Croissant" style="width:100%">
-        <h3>Le French</h3>
-        <p>Lorem lorem lorem lorem ipsum text praesent tincidunt ipsum lipsum.</p>
-    </div>
+ <?php
+$photo1->viewphotos(4,4);  
+    
+?>
+   
 
   </div>
 

@@ -16,11 +16,37 @@ class viewphotos
 		$list = '';
 		foreach ($result as $value) {
 			# code...
-			$list .= ' <br><br><h2>'.$value['title_photo'].'</h2> <img src="uploads/'.$value['PHOTO_FILE'].'" height="250" width="400"> <br><p>'.substr(file_handling::readafile($value['USER_COMM']),0,200).'...<a href="">Read More.</a></p><br>Category:-'.ucfirst(strtolower(uphotoupload::getcatdata('CATEGORY',$value['CATEGORY_ID']))).'<br> By:- <a href="?id='.$value['ID'].'">'.ucfirst(strtolower(getuserdata('first_name',$value['USER_ID']))).' '.ucfirst(strtolower(getuserdata('last_name',$value['USER_ID']))).'</a> ';
+			$list .= ' <br><br><h2>'.$value['title_photo'].'</h2> <img src="uploads/'.$value['PHOTO_FILE'].'" > <br><p>'.substr(file_handling::readafile($value['USER_COMM']),0,200).'...<a href="">Read More.</a></p><br>Category:-'.ucfirst(strtolower(uphotoupload::getcatdata('CATEGORY',$value['CATEGORY_ID']))).'<br> By:- <a href="?id='.$value['ID'].'">'.ucfirst(strtolower(getuserdata('first_name',$value['USER_ID']))).' '.ucfirst(strtolower(getuserdata('last_name',$value['USER_ID']))).'</a> ';
 
 		}
 		echo $list;
 		}
+		
+		else
+		{
+			echo '<h3>Nothing to display</h3>';
+		}
+	}
+		catch(Exception $ex){
+			echo $ex->getMessage();
+		}
+	}
+
+	public function viewurphoto_2()
+	{
+		try
+		{
+		$con = new PDO("mysql:host=localhost;dbname=a_database","root","");
+		$con->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+		$stmt_getph = $con->prepare("select * from panorama");
+		$stmt_getph->execute();
+		if($result = $stmt_getph->fetchAll()){
+		
+			$result = $stmt_getph->fetchAll();
+			echo $result;
+		}
+		
+		
 		
 		else
 		{
@@ -37,6 +63,13 @@ class viewphotos
 <html>
 <head>
 	<title>Share-O-Smile</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}
+.w3-sidenav a {padding:20px}
+</style>
 	<script type="text/javascript">
 		function load(abc){
 			document.getElementById(abc).innerHTML = '<b><i>Working...</i></b>';

@@ -81,7 +81,7 @@ if(!loggedin())
 		?>
 		<strong>Hi, <?php echo getuserdata('first_name',$_SESSION['id']); echo ' '.getuserdata('last_name',$_SESSION['id']); ?></strong> (<a href="logout.php">Logout</a>)
 		<br>
-		<a href="#">Upload your photo</a> | <a href="#">View your photos</a>(<?php echo getuserdata('p_uploaded',$_SESSION['id']); ?>)
+		<a href="#">Upload your photo</a> | <a href="view_photo.php">View your photos</a>(<?php echo getuserdata('p_uploaded',$_SESSION['id']); ?>)
 		<form action=<?php echo $_SERVER['PHP_SELF']; ?> method="POST" enctype="multipart/form-data">
 		<h3>Step 1: Let's give it a title.</h3><br>
 		<input type="text" name="title_photo"><br>
@@ -89,7 +89,7 @@ if(!loggedin())
         <input type="file" name="file" >
 		<br><br>
 		<h3>Step 3: Enter a paragraph saying why it makes you smile.</h3><br>
-		<textarea name="smile_say" cols="55" rows="10"></textarea><br><br>
+		<textarea class="textarea" name="smile_say" cols="55" rows="10"></textarea><br><br>
 		<h3>Step 4: Select a category.</h3><br>
 		
 		<?php
@@ -116,7 +116,7 @@ if(!loggedin())
 		?>
 		
         <br><br>
-		<input type="submit" value="Upload" name="submit"  />
+		<input type="submit" class="buttons" value="Upload" name="submit"  />
 		</form>
 		<br>
 		<div id="result"></div>
