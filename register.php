@@ -41,12 +41,11 @@ class registeruser
 		}
 		
 	}
-	public function insert($uid,$upass,$ufn,$uln,$urt)
+	public function insert($uid,$upass,$urt)
 	{
 		$this->userid = $uid;
 		$this->password = $upass;
-		$this->fname = $ufn;
-		$this->lname = $uln;
+		
 		$this->usert = $urt;
 		if(!$this->checkuser($uid))
 		{
@@ -54,19 +53,27 @@ class registeruser
 		{
 		
 		$con = new PDO("mysql:host=localhost;dbname=a_database","root","");
-			$stmt = $con->prepare("insert into register_user(user_id,password,first_name,last_name,p_uploaded,reg_time) values(:user_id,:password,:fname,:lname,0,:utime)");
+			$stmt = $con->prepare("insert into register_user(user_id,password,p_uploaded,reg_time,Token,Email_V) values(:user_id,:password,0,:utime,:token,:emailv)");
 			$stmt->bindParam(":user_id",$this->userid);
 			$stmt->bindParam(":password",$this->password);
-			$stmt->bindParam(":fname",$this->fname);
-			$stmt->bindParam(":lname",$this->lname);
+			
 			$stmt->bindParam(":utime",$this->usert);
+			$rand = rand(000000,999999);
+			$token = md5($rand.$this->userid.$this->usert);
+			$emailv = 0;
+			$stmt->bindParam(":token",$token);
+			$stmt->bindParam(":emailv",$emailv);
 			$stmt->execute();
 			
 			$to = "jyotirmoy85@gmail.com";
 			$subject = "A user has been registered";
-			$body= "A new user has been registered";
-			$header = "From: Website Admin <jyotirmoy85@gmail.com>";
-			if(mail($to,$subject,$body,$header))
+			$body= "You have been registered <br>"."<a href=http://localhost/Project_app/PHP_TESTING_PLANET/verify.php?id=".base64_encode($this->userid)."&token=".base64_encode($token).">Click to verify</a>";
+			$headers = "MIME-Version: 1.0" . "\r\n";
+			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+			// More headers
+			$headers .= 'From: Website Admin <jyotirmoy85@gmail.com>' . "\r\n";
+			if(mail($to,$subject,$body,$headers))
 			{
 				$con=null;
 				return true;
@@ -92,17 +99,16 @@ class registeruser
 	
 }
 
-if(isset($_POST["user_id"]) && !empty($_POST["user_id"]) && isset($_POST["user_pass"]) && !empty($_POST["user_pass"]) && isset($_POST["user_fname"]) && !empty($_POST["user_fname"]) && isset($_POST["user_lname"]) && !empty($_POST["user_lname"]))
+if(isset($_POST["user_id"]) && !empty($_POST["user_id"]) && isset($_POST["user_pass"]) && !empty($_POST["user_pass"]) )
 {
 	
 		
 		$uid = mysql_real_escape_string($_POST["user_id"]);
 		$upass = md5(mysql_real_escape_string($_POST["user_pass"]));
-		$ufn = mysql_real_escape_string($_POST["user_fname"]);
-		$uln = mysql_real_escape_string($_POST["user_lname"]);
+		
 		$urt = date("d M Y H:m:s",time());
 		$reg1 = new registeruser();
-		if($reg1->insert($uid,$upass,$ufn,$uln,$urt))
+		if($reg1->insert($uid,$upass,$urt))
 		{
 			echo 'You have been registered...<a  href="index.php">Login</a>';
 			

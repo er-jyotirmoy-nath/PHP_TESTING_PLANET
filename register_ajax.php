@@ -24,16 +24,14 @@ else
 			
 			var user_id = document.forms["register"]["user_id"].value;
 			var user_pass = document.forms["register"]["user_pass"].value;
-			var user_fname = document.forms["register"]["user_fname"].value;
-			var user_lname = document.forms["register"]["user_lname"].value;
 			var user_pass_a = document.forms["register"]["user_pass_a"].value;
-			if((user_id == '' || user_pass == '' || user_fname == '' || user_lname == '') && (user_pass != user_pass_a)){
+			if((user_id == '' || user_pass == '' ) && (user_pass != user_pass_a)){
 				window.alert("Not Entered");
 
 			}
 			else
 			{
-				var url = 'user_id='+user_id+'&user_pass='+user_pass+'&user_fname='+user_fname+'&user_lname='+user_lname;
+				var url = 'user_id='+user_id+'&user_pass='+user_pass;
 				document.getElementById('result1').innerHTML = "<i class=\"fa fa-circle-o-notch fa-spin fa-3x fa-fw\"></i><span class=\"sr-only\">Loading...</span>";
 					if(window.XMLHttpRequest){
 					xmlhttp = new XMLHttpRequest();
@@ -47,7 +45,7 @@ else
 						document.getElementById('result1').innerHTML = xmlhttp.responseText;
 					}
 				}
-				parameters1 = 'user_id='+user_id+'&user_pass='+user_pass+'&user_fname='+user_fname+'&user_lname='+user_lname;
+				parameters1 = 'user_id='+user_id+'&user_pass='+user_pass;
 				xmlhttp.open('POST','register.php',true);
 				xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
 				xmlhttp.send(parameters1);
@@ -58,20 +56,16 @@ else
 	</head>
 	<body>
 
-
-<h2>Please register yourself !!</h2><br>
+<div class="header">Welcome to share-o-smile webpage.</div>
+<h4>Please register yourself !!</h4><br>
 <div id="result1">
 <form name="register" >
-		Enter your Userid:<br>
+		Enter your Email id:<br>
 		<input type="text" name="user_id" value="" autocomplete="off"/><br><br>
 		Enter a Password:<br>
 		<input type="password" name="user_pass" value="" autocomplete="off" /><br><br>
 		Enter a Password Again:<br>
 		<input type="password" name="user_pass_a" value="" autocomplete="off"/><br><br>
-		Enter Fist Name:<br>
-		<input type="text" name="user_fname" value="" autocomplete="off"/><br><br>
-		Enter Last Name:<br>
-		<input type="text" name="user_lname" value="" autocomplete="off"/><br><br>
 		<input type="button" class="buttons" value="Submit" onclick="load2();" />
 		</form></div>
 		<?php

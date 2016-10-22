@@ -68,7 +68,7 @@ else
 	</script>
 </head>
 <body>
-<h2>Welcome to share-o-smile webpage.</h2>
+<div class="header">Welcome to share-o-smile webpage.</div>
 <h4>Got an amazing photo and want to share it with others?? Go ahead</h4>
 <?php
 if(!loggedin())

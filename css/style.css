@@ -12,6 +12,7 @@ input[type="text"],input[type="password"]{
   width:300px;
   border-radius:3px;
   border:2px solid #eee;
+  font-size: 13px;
  \\margin:5px auto;
   
 }
