@@ -1,10 +1,14 @@
-
 <?php
-
-
 /*a real life example*/
 class array_work
 {
+	public function __construct()
+	{
+		echo "Below this is a live problem solved <br>";
+	}
+	public function __destruct()
+	{
+	}
 	public function convert_to_city($city_assoc,$newcity)
 	{
 		//$newcity = $city;
@@ -27,18 +31,18 @@ $mywork = new array_work();
 $city = array("mumbai" => 5, "Mumbai" => 10,"Delhi" => 15,"DELHI" => 20,"madras" => 15,"Madras" => 5,"MADRAS" => 5,"MaDrAs" => 20);
 $newcity = array();
 $mywork->convert_to_city($city,$newcity);
-
+echo "<br> Below this we have our examples <br>Pushed an array<br>";
 $array_name = array("orange","apple","grapes","bannna");
-
+print_r($array_name);
 array_push($array_name,"Cucumber");
 print_r($array_name);
-echo '</br>';
+echo '</br> Pooped<br>';
 $fruit = array_pop($array_name);
 print_r($array_name);
-echo '</br>';
+echo '</br>Shifted<br>';
 array_shift($array_name);
 print_r($array_name);
-echo '</br>';
+echo '</br>Unshifted<br>';
 $array_name = array("orange","apple","grapes","bannna");
 array_unshift($array_name,"Mango");
 print_r($array_name);
