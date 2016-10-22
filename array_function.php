@@ -47,5 +47,26 @@ $array_name = array("orange","apple","grapes","bannna");
 array_unshift($array_name,"Mango");
 print_r($array_name);
 echo '</br>';
+
 echo array_key_exists(3, $array_name);
+echo '<br>Sorted City<br>';
+$array_name = array("orange","apple","grapes","bannna");
+sort($array_name);
+print_r($array_name);
+echo "<br>";
+rsort($array_name);
+print_r($array_name);
+echo "<br>";
+asort($city);
+print_r($city);
+echo "<br>";
+arsort($city);
+print_r($city);
+echo "<br>";
+ksort($city);
+print_r($city);
+echo "<br>";
+krsort($city);
+print_r($city);
+echo "<br>";
 ?>
