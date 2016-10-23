@@ -64,10 +64,10 @@ class registeruser
 			$stmt->bindParam(":token",$token);
 			$stmt->bindParam(":emailv",$emailv);
 			$stmt->execute();
-			
+			$id = $con->lastInsertId();
 			$to = "jyotirmoy85@gmail.com";
 			$subject = "A user has been registered";
-			$body= "You have been registered <br>"."<a href=http://localhost/Project_app/PHP_TESTING_PLANET/verify.php?id=".base64_encode($this->userid)."&token=".base64_encode($token).">Click to verify</a>";
+			$body= "You have been registered <br>"."<a href=http://localhost/Project_app/PHP_TESTING_PLANET/verify.php?id=".base64_encode($id)."&emailid=".base64_encode($this->userid)."&token=".base64_encode($token).">Click to verify</a>";
 			$headers = "MIME-Version: 1.0" . "\r\n";
 			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 

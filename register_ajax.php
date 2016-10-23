@@ -25,7 +25,7 @@ else
 			var user_id = document.forms["register"]["user_id"].value;
 			var user_pass = document.forms["register"]["user_pass"].value;
 			var user_pass_a = document.forms["register"]["user_pass_a"].value;
-			if((user_id == '' || user_pass == '' ) && (user_pass != user_pass_a)){
+			if((user_id == '' || user_pass == '' ) || (user_pass != user_pass_a)){
 				window.alert("Not Entered");
 
 			}
@@ -61,12 +61,12 @@ else
 <div id="result1">
 <form name="register" >
 		Enter your Email id:<br>
-		<input type="text" name="user_id" value="" autocomplete="off"/><br><br>
+		<input type="text" name="user_id" value="" autocomplete="off" onKeyUp="checkuser()"/><br><br>
 		Enter a Password:<br>
-		<input type="password" name="user_pass" value="" autocomplete="off" /><br><br>
+		<input type="password" name="user_pass" value="" autocomplete="off" onKeyUp="checkpass()" /><br><br>
 		Enter a Password Again:<br>
 		<input type="password" name="user_pass_a" value="" autocomplete="off"/><br><br>
-		<input type="button" class="buttons" value="Submit" onclick="load2();" />
+		<input type="button" class="buttons" value="Submit" onClick="load2();" />
 		</form></div>
 		<?php
 }

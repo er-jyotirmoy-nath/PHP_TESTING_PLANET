@@ -156,7 +156,6 @@ function getuserdata($field,$id){
 	try{
 
 	
-
 	$con = new PDO("mysql:host=localhost;dbname=a_database","root","");
 	$field = str_ireplace("'", "",$field);
 	$stmt = $con->prepare("SELECT ".$field." from register_user where id = :id");

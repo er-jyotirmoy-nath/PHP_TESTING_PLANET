@@ -40,6 +40,10 @@ else if (base64_decode($_GET['status'])=='registersuccess') {
 	# code...
 	echo '<h4>Yepee!! Registered Successfully...<a href="index.php">Go</a></h4>';
 }
+else if (base64_decode($_GET['status'])=='emailverified') {
+	# code...
+	echo '<h4>Email Veified Succeessfully...<a href="index.php">Go</a></h4>';
+}
 else
 {
 	header("Location: index.php");
