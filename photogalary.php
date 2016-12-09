@@ -1,5 +1,5 @@
 <?php
-require_once("file_handling_classes.php");
+require_once "file_handling_classes.php" ;
 class viewphoto extends file_handling
 {
 
