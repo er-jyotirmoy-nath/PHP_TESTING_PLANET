@@ -1,0 +1,23 @@
+<div id="div1">Hello</div>
+<div id="div2" style="display:none;">World</div>
+<div id="div3" style="display:none;">Jyoti</div>
+
+
+ setInterval(ToggleDiv, 5000);
+
+function ToggleDiv() {
+    if ($('#div1').is(':visible')) {
+        $('#div1').fadeToggle("slow", function () {
+            $('#div2').fadeToggle("slow");
+        });
+    }else if ($('#div2').is(':visible')) {
+        $('#div2').fadeToggle("slow", function () {
+            $('#div3').fadeToggle("slow");
+        });
+    }
+    else {
+        $('#div3').fadeToggle("slow", function () {
+            $('#div1').fadeToggle("slow");
+        });
+    }
+}
